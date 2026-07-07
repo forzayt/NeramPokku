@@ -20,7 +20,7 @@ export default function Header({ connected, connecting, onlineCount, username })
 
       {/* Title + status */}
       <div className="header-info">
-        <span className="header-title">nerampokku</span>
+        <span className="header-title">NeramPokku</span>
         <div className="header-sub">
           <span className={`online-dot ${statusClass}`} />
           <span>{statusText} · {onlineCount} online</span>
