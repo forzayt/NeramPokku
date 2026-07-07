@@ -67,6 +67,8 @@ export default function App() {
           <button onClick={() => setModalType('terms')}       className="footer-link-btn">Terms</button>
           <span className="footer-dot">•</span>
           <button onClick={() => setModalType('contributing')} className="footer-link-btn">Contributing</button>
+          <span className="footer-dot">•</span>
+          <a href="https://github.com/forzayt/NeramPokku" target="_blank" rel="noopener noreferrer" className="footer-link-btn">Source on github</a>
         </div>
       </footer>
 

@@ -565,6 +565,7 @@ html, body, #root {
   font-family: var(--font);
   transition: color 0.2s;
   padding: 2px 4px;
+  text-decoration: none;
 }
 .footer-link-btn:hover { color: var(--text-2); }
 
