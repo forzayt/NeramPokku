@@ -24,6 +24,11 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', uptime: process.uptime() });
 });
 
+// Root / Landing Endpoint
+app.get('/', (req, res) => {
+  res.send('server ok');
+});
+
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
