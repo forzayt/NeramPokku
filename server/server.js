@@ -87,6 +87,11 @@ io.on('connection', (socket) => {
       socket.emit('error_message', 'Thought cannot exceed 200 characters.');
       return;
     }
+    const linkRegex = /(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\b|\/))/i;
+    if (linkRegex.test(text)) {
+      socket.emit('error_message', 'Links are not allowed.');
+      return;
+    }
     if (username.length === 0 || username.length > 30) {
       socket.emit('error_message', 'Invalid username.');
       return;

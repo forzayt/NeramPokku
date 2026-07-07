@@ -529,6 +529,24 @@ html, body, #root {
   font-weight: 600;
 }
 
+.composer-warning {
+  padding: 6px 16px;
+  background: rgba(234, 67, 53, 0.1);
+  border-bottom: 1px solid rgba(234, 67, 53, 0.2);
+  color: #ea4335;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
 /* ─── Footer Links ────────────────────────────────────── */
 .footer-links {
   display: flex;

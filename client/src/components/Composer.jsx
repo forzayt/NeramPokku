@@ -20,7 +20,8 @@ export default function Composer({ onSubmit, connected }) {
     el.style.height = `${Math.min(el.scrollHeight, 120)}px`;
   }, [text]);
 
-  const canSend = text.trim().length > 0 && text.length <= 200 && cooldown === 0 && connected;
+  const hasLink = /(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\b|\/))/i.test(text);
+  const canSend = text.trim().length > 0 && text.length <= 200 && cooldown === 0 && connected && !hasLink;
 
   const handleSubmit = (e) => {
     e?.preventDefault();
@@ -41,6 +42,11 @@ export default function Composer({ onSubmit, connected }) {
 
   return (
     <form className="composer-form" onSubmit={handleSubmit}>
+      {hasLink && (
+        <div className="composer-warning">
+          <span>⚠️ Sharing links is not allowed</span>
+        </div>
+      )}
       <div className="composer-bar">
         {/* Input area */}
         <div className="composer-input-wrap">
