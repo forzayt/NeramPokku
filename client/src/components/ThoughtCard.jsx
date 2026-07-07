@@ -64,10 +64,7 @@ export default function ThoughtCard({ thought, ownUsername }) {
             style={{ width: `${lifePercent}%` }}
           />
         </div>
-        {/* Timestamp */}
-        <div className="bubble-meta">
-          <span className="bubble-time">{relTime}</span>
-        </div>
+
       </div>
     </div>
   );
