@@ -1,4 +1,4 @@
-# nerampokku (நேரம்போக்கு)
+# nerampokku (TimePass)
 
 An ephemeral, real-time public thought pool web application. Open it when you're bored, anonymously throw a short thought (max 200 characters) into the void, and watch it fade away. 
 
