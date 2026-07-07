@@ -33,13 +33,18 @@ export default function Header({ connected, connecting, onlineCount, username, o
         </div>
       </div>
 
-      {/* Online pill */}
-      {/* <div className="header-actions">
-        <div className="header-pill">
+      {/* Username pill */}
+      <div className="header-actions">
+        <div 
+          className="header-pill" 
+          onClick={onChangeUsername}
+          style={{ cursor: 'pointer' }}
+          title="Click to change username"
+        >
           <span className="header-pill-dot" />
-          <span>{onlineCount}</span>
+          <span>@{username}</span>
         </div>
-      </div> */}
+      </div>
     </header>
   );
 }

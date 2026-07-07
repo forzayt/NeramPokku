@@ -65,7 +65,14 @@ export function useSocket(username) {
       }, 4000);
     });
 
+    // Explicitly disconnect on page unload to speed up server-side detection
+    const handleBeforeUnload = () => {
+      socket.disconnect();
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
     return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
       socket.disconnect();
     };
   }, []);
