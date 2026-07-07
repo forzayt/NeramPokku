@@ -10,10 +10,10 @@ import UsernameModal from './components/UsernameModal';
 
 export default function App() {
   const [username, setUsername] = useState(() => {
-    return sessionStorage.getItem('nerampokku_username') || '';
+    return localStorage.getItem('nerampokku_username') || '';
   });
   const [showUsernameModal, setShowUsernameModal] = useState(() => {
-    return !sessionStorage.getItem('nerampokku_username');
+    return !localStorage.getItem('nerampokku_username');
   });
   const [modalType, setModalType] = useState(null);
 
@@ -26,7 +26,7 @@ export default function App() {
   const serverUnreachable = !connected && !connecting;
 
   const handleConfirmUsername = (newUsername) => {
-    sessionStorage.setItem('nerampokku_username', newUsername);
+    localStorage.setItem('nerampokku_username', newUsername);
     setUsername(newUsername);
     setShowUsernameModal(false);
   };
@@ -81,7 +81,7 @@ export default function App() {
           currentUsername={username}
           onConfirm={handleConfirmUsername}
           onClose={() => setShowUsernameModal(false)}
-          isForcePrompt={!sessionStorage.getItem('nerampokku_username')}
+          isForcePrompt={!localStorage.getItem('nerampokku_username')}
         />
       )}
     </div>

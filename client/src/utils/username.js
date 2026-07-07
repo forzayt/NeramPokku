@@ -19,11 +19,11 @@ export function generateRandomUsername() {
 }
 
 export function getAnonymousUsername() {
-  const cached = sessionStorage.getItem('nerampokku_username');
+  const cached = localStorage.getItem('nerampokku_username');
   if (cached) return cached;
 
   const username = generateRandomUsername();
-  sessionStorage.setItem('nerampokku_username', username);
+  localStorage.setItem('nerampokku_username', username);
   return username;
 }
 
