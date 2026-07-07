@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Header({ connected, connecting, onlineCount, username }) {
+export default function Header({ connected, connecting, onlineCount, username, onChangeUsername }) {
   const statusClass = connected ? 'active' : connecting ? 'pending' : 'inactive';
   const statusText  = connected ? 'Connected' : connecting ? 'Connecting…' : 'Disconnected';
 
@@ -14,9 +14,15 @@ export default function Header({ connected, connecting, onlineCount, username })
   return (
     <header className="app-header">
       {/* Avatar */}
-      <div className="header-avatar" title={`@${username}`}>
+      <div
+        className="header-avatar"
+        onClick={onChangeUsername}
+        title={`@${username} (Click to change)`}
+        style={{ cursor: 'pointer' }}
+      >
         {initials}
       </div>
+
 
       {/* Title + status */}
       <div className="header-info">

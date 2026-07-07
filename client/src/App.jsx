@@ -6,9 +6,15 @@ import ThoughtStream from './components/ThoughtStream';
 import Composer from './components/Composer';
 import InfoModal from './components/InfoModal';
 import UpdateLoader from './components/UpdateLoader';
+import UsernameModal from './components/UsernameModal';
 
 export default function App() {
-  const [username]   = useState(() => getAnonymousUsername());
+  const [username, setUsername] = useState(() => {
+    return sessionStorage.getItem('nerampokku_username') || '';
+  });
+  const [showUsernameModal, setShowUsernameModal] = useState(() => {
+    return !sessionStorage.getItem('nerampokku_username');
+  });
   const [modalType, setModalType] = useState(null);
 
   const {
@@ -18,6 +24,12 @@ export default function App() {
 
   // Show a fake "website updating" screen when server is unreachable
   const serverUnreachable = !connected && !connecting;
+
+  const handleConfirmUsername = (newUsername) => {
+    sessionStorage.setItem('nerampokku_username', newUsername);
+    setUsername(newUsername);
+    setShowUsernameModal(false);
+  };
 
   return (
     <div className="app-container">
@@ -29,7 +41,8 @@ export default function App() {
         connected={connected}
         connecting={connecting}
         onlineCount={onlineCount}
-        username={username}
+        username={username || 'anonymous'}
+        onChangeUsername={() => setShowUsernameModal(true)}
       />
 
       {/* ── Error toast (below header) ── */}
@@ -59,6 +72,17 @@ export default function App() {
 
       {/* ── Info modal ── */}
       <InfoModal type={modalType} onClose={() => setModalType(null)} />
+
+      {/* ── Username configuration modal ── */}
+      {showUsernameModal && (
+        <UsernameModal
+          currentUsername={username}
+          onConfirm={handleConfirmUsername}
+          onClose={() => setShowUsernameModal(false)}
+          isForcePrompt={!sessionStorage.getItem('nerampokku_username')}
+        />
+      )}
     </div>
   );
 }
+

@@ -12,14 +12,18 @@ const nouns = [
   'phoenix', 'seeker', 'feather', 'breeze', 'pulse'
 ];
 
+export function generateRandomUsername() {
+  const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+  const noun = nouns[Math.floor(Math.random() * nouns.length)];
+  return `${adj}_${noun}`;
+}
+
 export function getAnonymousUsername() {
   const cached = sessionStorage.getItem('nerampokku_username');
   if (cached) return cached;
 
-  const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
-  const noun = nouns[Math.floor(Math.random() * nouns.length)];
-  const username = `${adj}_${noun}`;
-  
+  const username = generateRandomUsername();
   sessionStorage.setItem('nerampokku_username', username);
   return username;
 }
+
