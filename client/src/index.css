@@ -13,14 +13,6 @@
   --text-2: #9aa0a6;
   --text-3: #5f6368;
 
-  --bubble-in: #1e2b24;
-  --bubble-in-border: rgba(52, 168, 83, 0.18);
-  --bubble-in-text: #e2ffe0;
-
-  --bubble-out: #1e2535;
-  --bubble-out-border: rgba(66, 133, 244, 0.18);
-  --bubble-out-text: #dce8ff;
-
   --accent-green: #34a853;
   --accent-blue: #4285f4;
   --accent-yellow: #fbbc04;
@@ -258,6 +250,14 @@ html, body, #root {
   white-space: nowrap;
 }
 
+/* ─── Color Variants ─────────────────────────────────── */
+.variant-blue   { --v-acc: #4285f4; --v-bg: #1e2535; --v-brd: rgba(66, 133, 244, 0.18); --v-txt: #dce8ff; --v-grd: linear-gradient(135deg, #4285f4, #1a56c4); }
+.variant-green  { --v-acc: #34a853; --v-bg: #1e2b24; --v-brd: rgba(52, 168, 83, 0.18); --v-txt: #e2ffe0; --v-grd: linear-gradient(135deg, #34a853, #1e8449); }
+.variant-purple { --v-acc: #a142f4; --v-bg: #261e35; --v-brd: rgba(161, 66, 244, 0.18); --v-txt: #f0e0ff; --v-grd: linear-gradient(135deg, #a142f4, #701eb4); }
+.variant-amber  { --v-acc: #fbbc04; --v-bg: #2b251e; --v-brd: rgba(251, 188, 4, 0.18); --v-txt: #fff4e0; --v-grd: linear-gradient(135deg, #fbbc04, #b4861e); }
+.variant-rose   { --v-acc: #ea4335; --v-bg: #2b1e1e; --v-brd: rgba(234, 67, 53, 0.18); --v-txt: #ffe0e0; --v-grd: linear-gradient(135deg, #ea4335, #b41e1e); }
+.variant-teal   { --v-acc: #008080; --v-bg: #1e2b2b; --v-brd: rgba(0, 128, 128, 0.18); --v-txt: #e0ffff; --v-grd: linear-gradient(135deg, #008080, #005a5a); }
+
 /* ─── Message Row ─────────────────────────────────────── */
 .message-row {
   display: flex;
@@ -299,10 +299,9 @@ html, body, #root {
   letter-spacing: -0.3px;
   color: #fff;
   user-select: none;
+  background: var(--v-grd);
 }
 
-.row-avatar.avatar-left  { background: linear-gradient(135deg, #34a853, #1e8449); }
-.row-avatar.avatar-right { background: linear-gradient(135deg, #4285f4, #1a56c4); }
 .row-avatar.invisible    { visibility: hidden; }
 
 /* Bubble content column */
@@ -323,10 +322,10 @@ html, body, #root {
   font-weight: 500;
   padding: 0 4px;
   margin-bottom: 2px;
+  color: var(--v-acc);
 }
 
-.bubble-name.name-left  { color: var(--accent-green); }
-.bubble-name.name-right { color: var(--accent-blue); text-align: right; }
+.bubble-name.name-right { text-align: right; }
 
 /* The bubble itself */
 .thought-bubble {
@@ -336,21 +335,19 @@ html, body, #root {
   cursor: default;
   transition: filter 0.2s;
   line-break: anywhere;
+  background: var(--v-bg);
+  border: 1px solid var(--v-brd);
 }
 
 .thought-bubble:hover { filter: brightness(1.08); }
 
 /* left-side (incoming) */
 .thought-bubble.bubble-left {
-  background: var(--bubble-in);
-  border: 1px solid var(--bubble-in-border);
   border-bottom-left-radius: 4px;
 }
 
 /* right-side (outgoing/own) */
 .thought-bubble.bubble-right {
-  background: var(--bubble-out);
-  border: 1px solid var(--bubble-out-border);
   border-bottom-right-radius: 4px;
 }
 
@@ -358,22 +355,18 @@ html, body, #root {
   font-size: 0.875rem;
   line-height: 1.45;
   font-weight: 400;
+  color: var(--v-txt);
 }
-
-.bubble-left  .bubble-text { color: var(--bubble-in-text); }
-.bubble-right .bubble-text { color: var(--bubble-out-text); }
 
 /* Lifeline bar at bottom of bubble */
 .bubble-lifeline {
   height: 2px;
   border-radius: 2px;
   margin-top: 6px;
-  background: rgba(255,255,255,0.07);
+  background: var(--v-acc);
+  opacity: 0.35;
   transition: width 1s linear;
 }
-
-.bubble-left  .bubble-lifeline { background: rgba(52, 168, 83, 0.35); }
-.bubble-right .bubble-lifeline { background: rgba(66, 133, 244, 0.35); }
 
 /* Timestamp */
 .bubble-meta {

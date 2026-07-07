@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-// Deterministic colour bucket from username string
-function colourSide(username) {
+// Deterministic color variant from username string
+function getUsernameColorVariant(username) {
   const sum = username.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
-  return sum % 2 === 0 ? 'left' : 'right';
+  const variants = ['green', 'purple', 'amber', 'rose', 'teal'];
+  return variants[sum % variants.length];
 }
 
 function getRelativeTime(ts) {
@@ -37,6 +38,7 @@ export default function ThoughtCard({ thought, ownUsername }) {
   // Decide side: user's own message goes right, others go left
   const isOwn = thought.username === ownUsername;
   const side  = isOwn ? 'right' : 'left';
+  const variant = isOwn ? 'blue' : getUsernameColorVariant(thought.username);
 
   const lifePercent = (timeLeft / 120) * 100;
 
@@ -49,14 +51,14 @@ export default function ThoughtCard({ thought, ownUsername }) {
   return (
     <div className={`message-row row-${side} ${isExpiring ? 'expiring' : ''}`}>
       {/* Avatar */}
-      <div className={`row-avatar avatar-${side}`}>
+      <div className={`row-avatar avatar-${side} variant-${variant}`}>
         {initials}
       </div>
 
       {/* Bubble column */}
       <div className="bubble-col">
-        <span className={`bubble-name name-${side}`}>@{thought.username}</span>
-        <div className={`thought-bubble bubble-${side}`}>
+        <span className={`bubble-name name-${side} variant-${variant}`}>@{thought.username}</span>
+        <div className={`thought-bubble bubble-${side} variant-${variant}`}>
           <p className="bubble-text">{thought.text}</p>
           {/* Shrinking lifeline */}
           <div
