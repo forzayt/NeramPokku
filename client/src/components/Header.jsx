@@ -28,12 +28,12 @@ export default function Header({ connected, connecting, onlineCount, username })
       </div>
 
       {/* Online pill */}
-      <div className="header-actions">
+      {/* <div className="header-actions">
         <div className="header-pill">
           <span className="header-pill-dot" />
           <span>{onlineCount}</span>
         </div>
-      </div>
+      </div> */}
     </header>
   );
 }
