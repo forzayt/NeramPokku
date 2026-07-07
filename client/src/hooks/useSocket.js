@@ -39,11 +39,7 @@ export function useSocket(username) {
       setError('Connection failed. Reconnecting...');
     });
 
-    socket.on('initial_pool', (initialMessages) => {
-      // Sort messages descending by createdAt (newest first)
-      const sorted = [...initialMessages].sort((a, b) => b.createdAt - a.createdAt);
-      setThoughts(sorted);
-    });
+
 
     socket.on('new_thought', (thought) => {
       setThoughts((prev) => {
