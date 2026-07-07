@@ -66,13 +66,18 @@ export function useSocket(username) {
     });
 
     // Explicitly disconnect on page unload to speed up server-side detection
-    const handleBeforeUnload = () => {
-      socket.disconnect();
+    const handleUnload = () => {
+      if (socket.connected) {
+        socket.disconnect();
+      }
     };
-    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    window.addEventListener('beforeunload', handleUnload);
+    window.addEventListener('unload', handleUnload);
 
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('beforeunload', handleUnload);
+      window.removeEventListener('unload', handleUnload);
       socket.disconnect();
     };
   }, []);

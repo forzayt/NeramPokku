@@ -66,7 +66,7 @@ setInterval(() => {
 }, 1000);
 
 io.on('connection', (socket) => {
-  const count = io.engine.clientsCount;
+  const count = io.sockets.sockets.size;
   console.log(`[Server] Socket connected: ${socket.id}. Current count: ${count}`);
   // Broadcast updated count to all clients
   io.emit('online_count', count);
@@ -138,10 +138,10 @@ io.on('connection', (socket) => {
     io.emit('new_thought', newMessage);
   });
 
-  socket.on('disconnect', () => {
+  socket.on('disconnect', (reason) => {
     lastMessageTimes.delete(socket.id);
-    const count = io.engine.clientsCount;
-    console.log(`[Server] Socket disconnected: ${socket.id}. Current count: ${count}`);
+    const count = io.sockets.sockets.size;
+    console.log(`[Server] Socket disconnected: ${socket.id} (${reason}). Current count: ${count}`);
     io.emit('online_count', count);
   });
 });
