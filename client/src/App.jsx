@@ -5,6 +5,7 @@ import Header from './components/Header';
 import ThoughtStream from './components/ThoughtStream';
 import Composer from './components/Composer';
 import InfoModal from './components/InfoModal';
+import UpdateLoader from './components/UpdateLoader';
 
 export default function App() {
   const [username]   = useState(() => getAnonymousUsername());
@@ -15,8 +16,14 @@ export default function App() {
     thoughts, error, submitThought,
   } = useSocket(username);
 
+  // Show a fake "website updating" screen when server is unreachable
+  const serverUnreachable = !connected && !connecting;
+
   return (
     <div className="app-container">
+      {/* ── Full-screen update loader when server is down ── */}
+      {serverUnreachable && <UpdateLoader />}
+
       {/* ── Top bar ── */}
       <Header
         connected={connected}
@@ -26,7 +33,7 @@ export default function App() {
       />
 
       {/* ── Error toast (below header) ── */}
-      {error && (
+      {error && !serverUnreachable && (
         <div className="app-toast-error">
           <span className="toast-icon">!</span>
           <span className="toast-text">{error}</span>

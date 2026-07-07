@@ -657,3 +657,141 @@ html, body, #root {
 .modal-body::-webkit-scrollbar { width: 4px; }
 .modal-body::-webkit-scrollbar-track { background: transparent; }
 .modal-body::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 2px; }
+
+/* ─── Update Loader Overlay ───────────────────────────── */
+.update-loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.update-loader-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 40px 32px;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+}
+
+/* ── Spinning ring around logo ── */
+.update-logo-ring {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.update-ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.update-ring-track {
+  fill: none;
+  stroke: var(--surface-3);
+  stroke-width: 4;
+}
+
+.update-ring-fill {
+  fill: none;
+  stroke: url(#loaderGrad);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 226;
+  stroke-dashoffset: 60;
+  filter: drop-shadow(0 0 6px rgba(66,133,244,0.6));
+}
+
+/* Inject gradient via a hidden SVG defs */
+.update-loader-overlay::after {
+  content: '';
+  display: none;
+}
+
+.update-ring-svg defs { display: block; }
+
+.update-logo-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border-radius: 50%;
+  margin: 8px;
+  border: 1px solid var(--border);
+}
+
+.update-logo-emoji {
+  font-size: 1.5rem;
+  animation: pulse-emoji 2s ease-in-out infinite;
+}
+
+@keyframes pulse-emoji {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.15); }
+}
+
+/* ── Gradient for ring via inline SVG trick ── */
+.update-ring-fill {
+  stroke: var(--accent-blue);
+}
+
+/* ── Text ── */
+.update-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: -0.02em;
+}
+
+.update-step {
+  font-size: 0.8rem;
+  color: var(--text-2);
+  min-height: 1.2em;
+  animation: fadeStep 0.5s ease;
+}
+
+@keyframes fadeStep {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Progress bar ── */
+.update-progress-track {
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+
+.update-progress-bar {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #4285f4, #34a853);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 8px rgba(66, 133, 244, 0.5);
+}
+
+.update-progress-pct {
+  font-size: 0.7rem;
+  color: var(--text-3);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
