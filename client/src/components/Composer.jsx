@@ -42,14 +42,6 @@ export default function Composer({ onSubmit, connected }) {
   return (
     <form className="composer-form" onSubmit={handleSubmit}>
       <div className="composer-bar">
-        {/* Left icon buttons (decorative, matching the screenshot aesthetic) */}
-        <button type="button" className="composer-icon-btn" title="Add" disabled={!connected}>
-          +
-        </button>
-        <button type="button" className="composer-icon-btn" title="Tag" disabled={!connected}>
-          #
-        </button>
-
         {/* Input area */}
         <div className="composer-input-wrap">
           <textarea
