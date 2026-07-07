@@ -25,7 +25,7 @@ export default function ThoughtStream({ thoughts, ownUsername }) {
   return (
     <div className="thought-stream">
       <div className="date-divider">
-        <span className="date-divider-text">Live Stream — thoughts vanish in 2 min</span>
+        <span className="date-divider-text">Here no one will be alone nor bored</span>
       </div>
       {chronological.map((thought) => (
         <ThoughtCard key={thought.id} thought={thought} ownUsername={ownUsername} />
