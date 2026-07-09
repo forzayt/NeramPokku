@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { getAnonymousUsername } from './utils/username';
 import { useSocket } from './hooks/useSocket';
 import Header from './components/Header';
@@ -33,6 +34,7 @@ export default function App() {
 
   return (
     <div className="app-container">
+      <Analytics />
       {/* ── Full-screen update loader when server is down ── */}
       {serverUnreachable && <UpdateLoader />}
 
