@@ -16,3 +16,4 @@ NeramPokku is an ephemeral public message pool. It allows users to post short, a
 
 ## 4. Modifications
 We reserves the right to modify or discontinue the Service at any time without notice.
+
